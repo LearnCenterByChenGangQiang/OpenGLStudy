@@ -57,6 +57,9 @@ bool Application::init(const int& width, const int& height, const char* title)
     // 设置窗体指针,this就是当前全局唯一的Application对象
     glfwSetWindowUserPointer(mWindow, this);
 
+    // 设置键盘的回调函数
+    glfwSetKeyCallback(mWindow, keyCallBack);
+
     return true;
 }
 
@@ -88,7 +91,20 @@ void Application::frameBufferSizeCallBack(GLFWwindow* window, int width, int hei
     //     Application::getInstance()->mResizeCallback(width, height);
     // }
     Application* self = static_cast<Application*>(glfwGetWindowUserPointer(window));
-    self->mResizeCallback(width, height);
+    if(self->mResizeCallback != nullptr)
+    {
+        self->mResizeCallback(width, height);
+    }
 }
+
+void Application::keyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    Application* self = static_cast<Application*>(glfwGetWindowUserPointer(window));
+    if(self->mKeyBoardCallback != nullptr)
+    {
+        self->mKeyBoardCallback(key, action, mods);
+    }
+}
+
 
 

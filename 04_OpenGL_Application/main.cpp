@@ -12,12 +12,20 @@ void OnResize(int width, int height)
 	GL_CALL(glViewport(0, 0, width, height));
 }
 
+void OnKeyBoard(int key, int action, int mods)
+{
+	std::cout << "OnKeyBoard: " << key << " " << action << " " << mods << std::endl;
+	
+}
+
+
 int main() {
 	if (!app->init(800, 600, "OpenGLStudy")) {
 		return -1;
 	}
 
 	app->setResizeCallback(OnResize);
+	app->setKeyBoardCallback(OnKeyBoard);
 
 	// 设置视口大小及清空颜色
 	glViewport(0, 0, 800, 600);

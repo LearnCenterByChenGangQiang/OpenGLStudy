@@ -1,0 +1,57 @@
+# 忽略生成的二进制文件和库文件
+**/out/
+**/.vs/
+
+
+# 忽略构建目录
+/build/
+bin/
+obj/
+
+# CMake 生成的文件
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+CTestTestfile.cmake
+*.ninja
+rules.ninja
+
+# Visual Studio 相关
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
+*.opensdf
+*.sdf
+*.suo
+*.user
+*.ipch
+*.pch
+*.obj
+*.tlog
+*.log
+*.lastbuildstate
+*.idb
+*.pdb
+
+# 忽略临时文件
+*.tmp
+*.swp
+*.bak
+*.log
+*.DS_Store
+
+# 忽略第三方库
+/thirdParty/lib-vc2022/
+/thirdParty/include/
+
+# 忽略调试文件
+*.dSYM/
+*.debug/
+*.stackdump
+
+# 忽略其他IDE配置文件
+.idea/
+.vscode/

@@ -51,6 +51,12 @@ int main() {
 	// 设置键盘输入的回调函数
 	glfwSetKeyCallback(window, keyCallBack);
 
+	// 初始化glad
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+		std::cerr << "Failed to initialize GLAD" << std::endl;
+		return -1;
+	}
+
 	//3.执行窗体循环
 	while (!glfwWindowShouldClose(window))
 	{

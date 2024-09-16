@@ -2,15 +2,12 @@
 #include <glad/glad.h> //必须在glfw3.h之前包含
 #include <GLFW/glfw3.h>
 #include <string>
+#include <assert.h>
+#include "wrapper/checkError.h"
 
 /*
-目标:
-	1. 使用glad加载所有当前版本需要的opengl函数
-	2. 函数练习:
-		glViewport:规定视口大小
-		glClearColor:设置清空颜色
-		glClear(GL_COLOR_BUFFER_BIT):清空颜色缓冲
-		glfwSwapBuffers(window) 执行双缓冲切换
+目标:将错误检查封装成一个函数
+
 */
 
 // 声明且实现一个窗体变化的回调函数
@@ -32,6 +29,8 @@ void keyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods
 		glfwSetWindowShouldClose(window, true);
 	}
 }
+
+
 
 int main() {
 	//1.初始化glfw基本环境
@@ -75,7 +74,8 @@ int main() {
 		glfwPollEvents();
 
 		// 清空颜色缓冲
-		glClear(GL_COLOR_BUFFER_BIT);
+		GL_CALL(glClear(-1));
+
 
 
 

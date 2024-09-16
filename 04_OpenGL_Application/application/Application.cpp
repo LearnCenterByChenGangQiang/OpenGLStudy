@@ -51,6 +51,11 @@ bool Application::init(const int& width, const int& height, const char* title)
 		return false;
 	}
 
+    // 设置窗体变化的回调函数
+    glfwSetFramebufferSizeCallback(mWindow, frameBufferSizeCallBack);
+
+    // 设置窗体指针,this就是当前全局唯一的Application对象
+    glfwSetWindowUserPointer(mWindow, this);
 
     return true;
 }
@@ -74,3 +79,16 @@ void Application::destroy()
     // 销毁glfw
     glfwTerminate();
 }
+
+void Application::frameBufferSizeCallBack(GLFWwindow* window, int width, int height)
+{
+    // std::cout << "frameBufferSizeCallBack: " << width << " " << height << std::endl;
+    // if(Application::getInstance()->mResizeCallback != nullptr)
+    // {
+    //     Application::getInstance()->mResizeCallback(width, height);
+    // }
+    Application* self = static_cast<Application*>(glfwGetWindowUserPointer(window));
+    self->mResizeCallback(width, height);
+}
+
+

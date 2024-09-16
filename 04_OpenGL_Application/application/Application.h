@@ -10,6 +10,8 @@
 
 class GLFWwindow;
 
+using ResizeCallback = void(*)(int width, int height);
+
 class Application
 {
 public:
@@ -23,6 +25,9 @@ public:
     uint32_t getWidth() const {return mWidth;};
     uint32_t getHeight() const {return mHeight;};
 
+    void setResizeCallback(ResizeCallback callback) {mResizeCallback = callback;};
+private:
+    static void frameBufferSizeCallBack(GLFWwindow* window, int width, int height);    
 private:    
     Application();
     static Application* mInstance;
@@ -31,4 +36,6 @@ private:
     uint32_t mHeight {0};
     const char* mTitle {nullptr};
     GLFWwindow* mWindow {nullptr};
+
+    ResizeCallback mResizeCallback {nullptr};
 };

@@ -4,13 +4,18 @@
 
 /*
 目标:
-	-创建glfw窗体系统
-	-加入窗体变化的事件回调
+	1. 使用glad加载所有当前版本需要的opengl函数
+	2. 函数练习:
+		glViewport:规定视口大小
+		glClearColor:设置清空颜色
+		glClear(GL_COLOR_BUFFER_BIT):清空颜色缓冲
+		glfwSwapBuffers(window) 执行双缓冲切换
 */
 
 // 声明且实现一个窗体变化的回调函数
 void frameBufferSizeCallBack(GLFWwindow* window, int width, int height) {
 	std::cout << "窗体大小变化: width=" << width << ", height=" << height << std::endl;
+	glViewport(0, 0, width, height);
 }
 
 // 键盘输入的回调函数
@@ -57,12 +62,23 @@ int main() {
 		return -1;
 	}
 
+	// 设置视口大小
+	glViewport(0, 0, 800, 600);
+	// 设置清空颜色
+	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+
 	//3.执行窗体循环
 	while (!glfwWindowShouldClose(window))
 	{
 		// 检查消息队列是否有需要处理的鼠标、键盘等消息
 		glfwPollEvents();
 
+		// 清空颜色缓冲
+		glClear(GL_COLOR_BUFFER_BIT);
+
+
+		// 交换颜色缓冲
+		glfwSwapBuffers(window);
 	}
 	
 	//4.退出程序前相关清理
